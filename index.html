@@ -1,57 +1,178 @@
----
-layout: post-index
----
-{% for post in paginator.posts %}
-<article>
-    
-    <!-- POST FEATURED IMAGE -->
-    <div class="featured-image">
-    <img src="{{ post.featured-image}}" style="width:100%">
-    </div>
 
-    <!-- POST TITLE -->
-    <header>
-        <h1 class="entry-title">
-            <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a>
-        </h1>
-        <h3 class="entry-subtitle">
-            <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.subtitle }}</a>
-        </h3>
-    </header>
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="keywords" content=""/>
+		<meta name="description" content=""/>
+		<title> 少女. &#10049 的专属网站</title>
+		<style>
+			*{margin:0;padding:0;}
+			body{
+                background:url("./images/1.jpg") no-repeat;
+                width: 100vw;
+                height: 100vh;
+                background-size:100% 100%;
+                /* background-size:cover; */
+            }
+			/*start top*/
+			.top{
+                width:400px;
+                height:100px;
+                margin:60px auto;
+                font-size:30px;font-family:"华文行楷";
+                color:#fff;
+            }
+			
+			/*end top*/
+			/*start box*/
+			.box{
+                width:310px;
+                height:310px;
+                margin:auto;
+                perspective:800px;/*景深*/
+            }
+			.box .pic{
+                position:relative;
+                transform-style:preserve-3d;/*3d环境*/ 
+                animation:play 10s linear infinite;/*动画名称 执行时间 匀速 无限执行*/
+            }
+			.box ul li{
+                list-style:none;
+                position:absolute;
+                top:0;
+                left:0;
+            }
+            .box ul li img{
+                width: 240px;
+                height: 240px;
+                border-radius: 25px;
+            }
+			/*start box*/
+			/*定义一个关键帧*/
+			@keyframes play{
+				from{transform:rotateY(0deg);}
+				to{transform:rotateY(360deg);}
+			}
+			#text{
+                text-indent: 2em;
+                width:70vw;
+                height:200px;
+                color:#6fade1;
+                margin:auto;
+                font-size:2em;
+                font-family:"隶书";
+            }
+			/* 遮罩层 */
+            .shade{
+                width: 100vw;
+                height: 100vh;
+                background-color: skyblue;
+                position: fixed;
+                z-index: 999;
+                top: 0;
+                text-align: center;
+                display: flex;
+                align-items: center; 
+                justify-content: center;
+                background:url("./images/7.jpg") no-repeat;
+                background-size:100% 100%;
+            }
+            .shade h1 {
+                font-family: 隶书;
+                font-size: 3rem;
+            }
+		</style>
+	</head>
+	<body>
+        <div class="shade">
+            <h1>衣带渐宽终不悔<br/>
+                为伊消得人憔悴<br/>
+                <span style="color: green;">点击打开</span>
+            </h1>
+        </div>
 
-    <!-- POST CONTENT -->
-<!--     <div class="entry-content">
-        {{ post.content }}
-    </div> -->
-    
-    <!--- DIVIDING LINE -->
-    <hr>
-    
-    <!-- POST TAGS -->
-    <div class="inline-tags">
-        <span>
-        {% for tag in post.tags %}
-            <a href="/tags/#{{tag}}">#{{ tag }}&nbsp;&nbsp;&nbsp;</a>
-        {% endfor %}
-        </span>
-    </div>
-    
-    <br>
-    
-    <!-- POST DATE -->
-    <div class="post-date">
-        <span class="entry-date date published updated">
-            <time datetime="{{ post.date | date_to_xmlschema }}">
-                <a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a>
-            </time>
-        </span>
-    </div>
-    
-</article>
-{% endfor %}
+		<div class="top">
+			<marquee behavior="alternate">时光不老 我们不散</marquee>
+		</div>
+	
+		<div class="box">
+			<div class="pic">
+				<ul>
+					<li><img src="images/1.jpg" width="" height="" alt=""/></li>
+					<li><img src="images/2.jpg" width="" height="" alt=""/></li>
+					<li><img src="images/3.jpg" width="" height="" alt=""/></li>
+					<li><img src="images/4.jpg" width="" height="" alt=""/></li>
+					<li><img src="images/5.jpg" width="" height="" alt=""/></li>
+					<li><img src="images/6.jpg" width="" height="" alt=""/></li>
+				</ul>
+			</div>
+		</div>
+		<div id="text"></div>
+        <audio src="./1.mp3" loop id="music"></audio>
+      
+		
+		<script src="./js/jquery.min.js"></script>
+		<!--雪花-->
+		<script src="./js/snow.js"></script>
+		<script>
+			$(".pic ul li").each(function(i){//遍历
+				var deg=360/$(".pic ul li").size();//size个数
+				//当前的li对象 添加css样式
+				$(this).css({"transform":"rotateY("+deg*i+"deg) translateZ(216px)"});
+				
+				$.fn.snow({
+					minSize:10,
+					maxSize:15,
+					newOn:500,
+					flakeColor:"#ffffff"
+				});
+			});
+			
+			var i=0;
+			var str="在污浊混乱的人间撞上了周小姐，是一介粗人一生的幸运。";
+			
+			window.onload=function typing(){
+				//获取div
+				var mydiv=document.getElementById("text");
+				mydiv.innerHTML+=str.charAt(i);
+				i++;
+				var id=setTimeout(typing,300);
+				if(i==str.length){
+                    // i = 0
+                    // mydiv.innerHTML = ''
+					clearTimeout(id);
+				}
+                
+			}
+            changeBgImg()
 
-<div class="pagination">
-<center>
-{% include pagination.html %}
-</center>
-    </div>
+            function changeBgImg(){
+                let i = 1
+                setInterval(()=>{
+                    document.getElementsByTagName('body')[0].style.background = 'url("./images/' + i + '.jpg") no-repeat';
+                    document.getElementsByTagName('body')[0].style.backgroundSize = '100% 100%';
+                    i++
+                    i = i >= 7? 1 : i
+                }, 3000)
+                
+            }
+
+        let audioSrc = 1
+            document.getElementsByTagName('body')[0].onclick = function(){
+                $('.shade').animate({height: 0}, 500, function(){
+                    $('h1').hide()
+                })
+                $('#music')[0].pause();
+                    if(audioSrc > 5){
+                        audioSrc = 1
+                    }
+                    var luyinpath = $(this).attr( './' + audioSrc + '.mp3');
+                    $('#music').attr('src', './' + audioSrc++ + '.mp3');
+                    $('#music')[0].play();
+                    console.log('换音乐了');
+            }
+        　　
+		</script>
+	</body>
+</html>

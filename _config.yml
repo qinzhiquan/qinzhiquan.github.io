@@ -1,12 +1,11 @@
-title:            Slate+Simple Jekyll Theme
-description:      Your site description...
-copyright:        Your Name
-url: # add your custom site url (format: https://example.com)
+title: 水手的个人博客
+description: 天空没有翅膀的痕迹，但鸟儿已飞过。
+copyright: 覃志权
+url: https://qinzhiquan.github.io/
 
-
-future:      false  # publish future dated posts --  true, false (default)
+future: false # publish future dated posts --  true, false (default)
 highlighter: rouge
-markdown:    kramdown
+markdown: kramdown
 gems:
   - jekyll-sitemap
   - jekyll-paginate

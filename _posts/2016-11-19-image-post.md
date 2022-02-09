@@ -5,6 +5,7 @@ title: Image Post
 tags: [sample post]
 date-string: NOVEMBER 19, 2016
 ---
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="_/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
 
@@ -21,7 +22,7 @@ Lorem ipsum dolor sit amet, interdum fermentum arcu, ipsum venenatis curabitur d
     </div>
 </center>
 
- Sit mollis consectetuer tempor in, sociosqu mi in ornare et, placerat in eget ac, praesent pellentesque, mollis est natoque. Quis quis, ac ac pretium sed fusce sollicitudin cursus, magna vitae placerat tincidunt sed dictumst, nullam rutrum pharetra consectetuer. Erat libero odio venenatis, et id ac ultrices convallis, ac iaculis nec vestibulum etiam nec metus, integer velit dictum. Inceptos laoreet at wisi libero dolor, id scelerisque vulputate a amet amet dapibus, at et vitae nec aliquam, fringilla vitae quam. Mauris felis nec sagittis posuere mauris, penatibus ullamcorper, tristique aliquet, vel posuere class placerat. Ornare et non magnis fusce.
+Sit mollis consectetuer tempor in, sociosqu mi in ornare et, placerat in eget ac, praesent pellentesque, mollis est natoque. Quis quis, ac ac pretium sed fusce sollicitudin cursus, magna vitae placerat tincidunt sed dictumst, nullam rutrum pharetra consectetuer. Erat libero odio venenatis, et id ac ultrices convallis, ac iaculis nec vestibulum etiam nec metus, integer velit dictum. Inceptos laoreet at wisi libero dolor, id scelerisque vulputate a amet amet dapibus, at et vitae nec aliquam, fringilla vitae quam. Mauris felis nec sagittis posuere mauris, penatibus ullamcorper, tristique aliquet, vel posuere class placerat. Ornare et non magnis fusce.
 
 <script src="/assets/js/jquery.photoset-grid.js"></script>
 

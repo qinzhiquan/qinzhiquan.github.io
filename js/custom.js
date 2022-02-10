@@ -68,6 +68,23 @@ $(function () {
 
     });
 
+    $(".stop_music").attr("style", "display:none;");  //隐藏
+    //-- 播放音乐
+    $('.play_music').on('click', function () {
+      var filterValue = $(this).attr('data-filter');
+      $('#music').attr('src', 'musics/' + filterValue);
+      $('#music')[0].play();
+      $(".home_play").attr("style", "display:none;");  //隐藏
+      $(".stop_music").attr("style", "display:inline-block;"); //显示
+    });
+
+    //-- 停止音乐
+    $('.stop_music').on('click', function () {
+      $('#music')[0].pause();
+      $(".stop_music").attr("style", "display:none;");  //隐藏
+      $(".home_play").attr("style", "display:inline-block;"); //显示
+    });
+
     /*--------------------------------
         03. Functions 
     ----------------------------------*/

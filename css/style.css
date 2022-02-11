@@ -1468,3 +1468,8 @@ a.rslides_nav.rslides1_nav.next {
 }
 
 /*end option box*/
+
+/* 碎语 段落 */
+.text-indent_2 {
+  text-indent: 2em;
+}

@@ -1,3 +1,3 @@
 # Slate+Simple Jekyll Theme
 
-水手的个人博客
+移动营销app下载

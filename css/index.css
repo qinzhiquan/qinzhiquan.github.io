@@ -23,9 +23,9 @@ body {
 .container {
   color: aliceblue;
   background-color: rgba(0, 0, 0, 0.7);
-  width: 80%;
+  width: 100%;
   height: auto;
-  margin: 5px;
+  padding: 5%;
   min-width: 350px;
   margin-bottom: 5vh;
   /* max-height: 90vh; */
@@ -68,6 +68,10 @@ body {
 
 .dot {
   font-size: 17px;
+}
+
+.delDot {
+  background-color: #ccc!important;
 }
 
 .dot_number {

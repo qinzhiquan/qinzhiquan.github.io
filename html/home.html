@@ -82,7 +82,7 @@
                     </el-table-column>
                     <el-table-column prop="total" label="统计" header-align="center">
                         <template slot-scope="scope">
-                            <div v-if="tableData_1[scope.$index].total">
+                            <div v-if="tableData_1[scope.$index].total || tableData_copy_1[scope.$index].total">
                                 {{tableData_1[scope.$index].total}} + {{tableData_copy_1[scope.$index].total}} =
                                 {{tableData_1[scope.$index].total + tableData_copy_1[scope.$index].total}}
                             </div>
@@ -191,7 +191,7 @@
                     </el-table-column>
                     <el-table-column prop="total" label="统计" header-align="center">
                         <template slot-scope="scope">
-                            <div v-if="tableData_2[scope.$index].total">
+                            <div v-if="tableData_2[scope.$index].total || tableData_copy_2[scope.$index].total">
                                 {{tableData_2[scope.$index].total}} + {{tableData_copy_2[scope.$index].total}} =
                                 {{tableData_2[scope.$index].total + tableData_copy_2[scope.$index].total}}
                             </div>

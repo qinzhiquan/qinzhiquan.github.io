@@ -272,7 +272,8 @@
                     title,
                     activeName: 'table_1',
                     isShowOther,
-                    total: 50,
+                    maxTotal: 80,
+                    minTotal: -40,
                     isCheckTotal_1: false,
                     isCheckTotal_2: false,
 
@@ -601,7 +602,7 @@
                         // 计算统计值
                         setTimeout(() => {
                             let total = row_index >= 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
-                            let isCheckTotal = total >= this.total || total <= -this.total
+                            let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
                             isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
 
 
@@ -701,7 +702,7 @@
                         // 计算统计值
                         setTimeout(() => {
                             let total = row_index > 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
-                            let isCheckTotal = total >= this.total || total <= -this.total
+                            let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
                             isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
 
                             for (let i = 1; i <= column_length; i++) {

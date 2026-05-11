@@ -60,16 +60,38 @@
                         </template>
                     </el-table-column>
                     <el-table-column v-if="isShowOther" prop="sum_B" label="黑色" header-align="center">
+                        <template slot-scope="scope">
+                            <div>
+                                {{tableData_1[scope.$index].sum_B}} | {{tableData_copy_1[scope.$index].sum_B}}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column v-if="isShowOther" prop="sum_W" label="白色" header-align="center">
+                        <template slot-scope="scope">
+                            <div>
+                                {{tableData_1[scope.$index].sum_W}} | {{tableData_copy_1[scope.$index].sum_W}}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="difference" label="差值" header-align="center">
+                        <template slot-scope="scope">
+                            <div>
+                                {{tableData_1[scope.$index].difference}} | {{tableData_copy_1[scope.$index].difference}}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="total" label="统计" header-align="center">
+                        <template slot-scope="scope">
+                            <div v-if="tableData_1[scope.$index].total">
+                                {{tableData_1[scope.$index].total}} + {{tableData_copy_1[scope.$index].total}} =
+                                {{tableData_1[scope.$index].total + tableData_copy_1[scope.$index].total}}
+                            </div>
+                        </template>
                     </el-table-column>
                 </el-table>
                 <el-table ref="tab_copy_1" border :data="tableData_copy_1"
-                    style="width: 100%; margin-top: 5px; text-align: center;" :max-height="tableHight">
+                    style="width: 100%; margin-top: 5px; text-align: center;" :max-height="tableHight"
+                    v-if="tableHight >= 500">
                     <el-table-column label="序号" type="index" width="50">
                     </el-table-column>
                     <el-table-column prop="selectType" label="选定" header-align="center">
@@ -153,17 +175,31 @@
                             </div>
                         </template>
                     </el-table-column>
-                    <el-table-column v-if="isShowOther" prop="sum_B" label="黑色" header-align="center">
-                    </el-table-column>
                     <el-table-column v-if="isShowOther" prop="sum_W" label="白色" header-align="center">
+                        <template slot-scope="scope">
+                            <div>
+                                {{tableData_2[scope.$index].sum_W}} | {{tableData_copy_2[scope.$index].sum_W}}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="difference" label="差值" header-align="center">
+                        <template slot-scope="scope">
+                            <div>
+                                {{tableData_2[scope.$index].difference}} | {{tableData_copy_2[scope.$index].difference}}
+                            </div>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="total" label="统计" header-align="center">
+                        <template slot-scope="scope">
+                            <div v-if="tableData_2[scope.$index].total">
+                                {{tableData_2[scope.$index].total}} + {{tableData_copy_2[scope.$index].total}} =
+                                {{tableData_2[scope.$index].total + tableData_copy_2[scope.$index].total}}
+                            </div>
+                        </template>
                     </el-table-column>
                 </el-table>
                 <el-table ref="tab_copy_2" border :data="tableData_copy_2"
-                    style="width: 100%; margin-top: 5px; text-align: center;" :max-height="tableHight">
+                    style="width: 100%; margin-top: 5px; text-align: center;" :max-height="tableHight" v-if="tableHight >= 500">
                     <el-table-column label="序号" type="index" width="50">
                     </el-table-column>
                     <el-table-column prop="selectType" label="选定" header-align="center">
@@ -259,7 +295,7 @@
 
                 this.windowWhith = window.innerWidth || document.documentElement.clientWidth;
 
-                this.tableHight = this.windowWhith >= 750 ? 550 : 250
+                this.tableHight = this.windowWhith >= 750 ? 550 : 450
             },
             mounted() {
 
@@ -279,6 +315,9 @@
                     }
 
                     const table_copy = this.$refs[`tab_copy_${table_index}`]
+                    if(!table_copy){
+                        return
+                    }
                     const divData_copy = table_copy.bodyWrapper
                     if (divData_copy.clientHeight + divData_copy.scrollTop != divData_copy.scrollHeight) {
                         divData_copy.scrollTop += height
@@ -511,7 +550,6 @@
                     }
                     this[`total_copy_${table_index}`] += total
                     row.total = this[`total_copy_${table_index}`]
-                    console.log(row);
 
                 },
                 // 选定
@@ -547,7 +585,7 @@
                             if (table_index == 1) {
                                 // 大于max_number归一
                                 if (!row[`del_${i}`] && next_row[i] != '-') {
-                                    if (row_index < 20) {
+                                    if (row_index < 6) {
                                         if (row[i] != '-' && row[i] != type) {
                                             let number = row[`num_${i}`] * 2
                                             next_row[`num_${i}`] = number > max_number ? 1 : number
@@ -575,6 +613,7 @@
                                     if (row[i] != '-' && row[i] != type) {
                                         next_row[`num_${i}`] = number > max_number ? 1 : number
                                         if (next_row[`num_${i}`] == 32) {
+                                            this.$message.info(`左表第${i}列第${row_index + 2}行往下停止计算`)
                                             this.setDel(this[`tableData_${table_index}`], row_index + 2, i, column_length)
                                         }
 
@@ -628,7 +667,7 @@
                             if (table_index == 1) {
                                 // 大于max_number归一
                                 if (!row[`del_${i}`] && next_row[i] != '-') {
-                                    if (row_index < 20) {
+                                    if (row_index < 6) {
                                         if (row[i] != '-' && row[i] == type) {
                                             let number = row[`num_${i}`] * 2
                                             next_row[`num_${i}`] = number > max_number ? 1 : number
@@ -655,6 +694,7 @@
                                     if (row[i] != '-' && row[i] == type) {
                                         next_row[`num_${i}`] = number > max_number ? 1 : number
                                         if (next_row[`num_${i}`] == 32) {
+                                            this.$message.info(`右表第${i}列第${row_index + 2}行往下停止计算`)
                                             this.setDel(this[`tableData_copy_${table_index}`], row_index + 2, i, column_length)
                                         }
                                     } else {
@@ -677,8 +717,6 @@
 
                 // 归零
                 setDel(data, row, column, column_length) {
-                    console.log(`删除第${column}列`);
-
                     for (let i = row, length = data.length; i < length; i++) {
                         for (let j = 0; j < column_length; j++) {
                             if (j == column) {

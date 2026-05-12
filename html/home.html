@@ -17,8 +17,8 @@
         <div class="btn-group">
             <el-button v-if="windowWhith > 750" size="mini" :type="isShowOther? 'primary' : ''" @click="changeIsShow()"
                 icon="el-icon-s-opportunity" circle></el-button>
-            <el-button size="mini" type="primary" @click="revocationMain()">撤销</el-button>
-            <el-button size="mini" @click="reset()">重置</el-button>
+            <!-- <el-button size="mini" type="primary" @click="revocationMain()">撤销</el-button>
+            <el-button size="mini" @click="reset()">重置</el-button> -->
         </div>
         <el-tabs size="mini" v-model="activeName" @tab-click="handleClick" type="card">
             <el-tab-pane label="A" name="table_1" lazy>

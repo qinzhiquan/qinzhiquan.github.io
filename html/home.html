@@ -39,7 +39,8 @@
                                         @click="selectDotMain( 'W', scope.$index, 1)"><span
                                             class="dot">○</span></el-button>
                                 </div>
-                                <el-button size="mini" type="primary" slot="reference">选定</el-button>
+                                <el-button size="mini" type="primary"
+                                    slot="reference">选定</el-button>
                             </el-popover>
                             <div class="dot_box" v-else>
                                 <span class="dot" v-if="scope.row.selectType == 'B'">●</span>
@@ -107,7 +108,8 @@
                                         @click="selectDotMain('W', scope.$index, 1)"><span
                                             class="dot">○</span></el-button>
                                 </div>
-                                <el-button size="mini" type="primary" slot="reference">选定</el-button>
+                                <el-button  size="mini" type="primary"
+                                    slot="reference">选定</el-button>
                             </el-popover>
                             <div class="dot_box" v-else>
                                 <span class="dot" v-if="scope.row.selectType == 'B'">●</span>
@@ -155,7 +157,8 @@
                                         @click="selectDotMain('W', scope.$index, 2)"><span
                                             class="dot">○</span></el-button>
                                 </div>
-                                <el-button size="mini" type="primary" slot="reference">选定</el-button>
+                                <el-button  size="mini" type="primary"
+                                    slot="reference">选定</el-button>
                             </el-popover>
                             <div class="dot_box" v-else>
                                 <span class="dot" v-if="scope.row.selectType == 'B'">●</span>
@@ -223,7 +226,8 @@
                                         @click="selectDotMain('W', scope.$index, 2)"><span
                                             class="dot">○</span></el-button>
                                 </div>
-                                <el-button size="mini" type="primary" slot="reference">选定</el-button>
+                                <el-button  size="mini" type="primary"
+                                    slot="reference">选定</el-button>
                             </el-popover>
                             <div class="dot_box" v-else>
                                 <span class="dot" v-if="scope.row.selectType == 'B'">●</span>
@@ -272,8 +276,8 @@
                     title,
                     activeName: 'table_1',
                     isShowOther,
-                    maxTotal: 80,
-                    minTotal: -40,
+                    maxTotal,
+                    minTotal,
                     isCheckTotal_1: false,
                     isCheckTotal_2: false,
 
@@ -577,6 +581,16 @@
                 },
                 // 选定
                 selectDot(row, type, row_index, table_index) {
+                    let total = row_index >= 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
+                    let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
+                    isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
+                    if (isCheckTotal) {
+                        this.$message.warning('已达到最大值或最小值')
+                        this[`isCheckTotal_${table_index}`] = true
+                        return
+                    }
+
+
                     row.selectType = type
                     let column_length = 0
                     switch (table_index) {
@@ -601,9 +615,7 @@
 
                         // 计算统计值
                         setTimeout(() => {
-                            let total = row_index >= 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
-                            let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
-                            isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
+
 
 
 
@@ -678,6 +690,14 @@
 
                 // 选定
                 selectDot_copy(row, type, row_index, table_index) {
+                    let total = row_index > 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
+                    let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
+                    isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
+                    if (isCheckTotal) {
+                        this.$message.warning('已达到最大值或最小值')
+                        this[`isCheckTotal_${table_index}`] = true
+                        return
+                    }
                     row.selectType = type
                     let column_length = 0
                     switch (table_index) {
@@ -701,18 +721,15 @@
 
                         // 计算统计值
                         setTimeout(() => {
-                            let total = row_index > 1 ? this[`tableData_${table_index}`][row_index - 1].total + this[`tableData_copy_${table_index}`][row_index - 1].total : 0
-                            let isCheckTotal = total >= this.maxTotal || total <= this.minTotal
-                            isCheckTotal = isCheckTotal || this[`isCheckTotal_${table_index}`]
+
 
                             for (let i = 1; i <= column_length; i++) {
 
                                 if (isCheckTotal) {
-                                   
-                                    
+
+
                                     this[`isCheckTotal_${table_index}`] = true
                                     if (row[i] != '-' && row[i] == type) {
-                                         console.log(1111111);
                                         this.setDel(this[`tableData_copy_${table_index}`], row_index, i, column_length, table_index)
                                     }
                                 }
